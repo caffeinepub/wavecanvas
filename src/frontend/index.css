@@ -1,0 +1,313 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   FONT FACES
+   ============================================================ */
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono[wght].woff2") format("woff2");
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono[wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mona Sans";
+  src: url("/assets/fonts/MonaSans[wdth,wght].woff2") format("woff2");
+  font-weight: 200 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("/assets/fonts/Geist[wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* ============================================================
+   DESIGN TOKENS — Dark Hardware Synth Aesthetic
+   ============================================================ */
+@layer base {
+  :root {
+    --radius: 0.25rem;
+
+    /* === Core palette: Deep space black + electric cyan + amber ===
+       Background stack: darkest to lighter panels
+       Accent: electric cyan for active states
+       Warm: amber for accent lanes, LED indicators
+    */
+    --background: 0.08 0.005 250;        /* near-black with faint blue cast */
+    --foreground: 0.92 0.01 200;         /* cool off-white */
+    --card: 0.12 0.008 250;              /* panel background */
+    --card-foreground: 0.88 0.01 200;
+    --popover: 0.14 0.01 250;
+    --popover-foreground: 0.9 0.01 200;
+    --primary: 0.78 0.18 195;            /* electric cyan */
+    --primary-foreground: 0.08 0.005 250;
+    --secondary: 0.18 0.01 250;          /* dark secondary panel */
+    --secondary-foreground: 0.78 0.18 195;
+    --muted: 0.15 0.008 250;
+    --muted-foreground: 0.52 0.02 220;
+    --accent: 0.72 0.19 55;              /* amber accent */
+    --accent-foreground: 0.08 0.005 250;
+    --destructive: 0.65 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+    --border: 0.22 0.012 240;
+    --input: 0.16 0.01 240;
+    --ring: 0.78 0.18 195;
+
+    /* Synth-specific custom tokens */
+    --cyan: 0.78 0.18 195;
+    --cyan-bright: 0.88 0.22 195;
+    --amber: 0.72 0.19 55;
+    --green-led: 0.75 0.22 145;
+    --red-led: 0.65 0.22 25;
+    --panel: 0.11 0.008 250;
+    --panel-raised: 0.14 0.01 245;
+    --panel-inset: 0.07 0.005 255;
+    --step-active: 0.78 0.18 195;
+    --step-accent: 0.72 0.19 55;
+    --step-inactive: 0.2 0.012 245;
+    --knob-bg: 0.13 0.01 250;
+    --knob-track: 0.3 0.02 240;
+    --knob-indicator: 0.78 0.18 195;
+
+    --chart-1: 0.78 0.18 195;
+    --chart-2: 0.72 0.19 55;
+    --chart-3: 0.75 0.22 145;
+    --chart-4: 0.65 0.22 290;
+    --chart-5: 0.65 0.22 25;
+
+    --sidebar: 0.11 0.008 250;
+    --sidebar-foreground: 0.88 0.01 200;
+    --sidebar-primary: 0.78 0.18 195;
+    --sidebar-primary-foreground: 0.08 0.005 250;
+    --sidebar-accent: 0.18 0.01 250;
+    --sidebar-accent-foreground: 0.78 0.18 195;
+    --sidebar-border: 0.22 0.012 240;
+    --sidebar-ring: 0.78 0.18 195;
+  }
+
+  .dark {
+    --background: 0.08 0.005 250;
+    --foreground: 0.92 0.01 200;
+    --card: 0.12 0.008 250;
+    --card-foreground: 0.88 0.01 200;
+    --popover: 0.14 0.01 250;
+    --popover-foreground: 0.9 0.01 200;
+    --primary: 0.78 0.18 195;
+    --primary-foreground: 0.08 0.005 250;
+    --secondary: 0.18 0.01 250;
+    --secondary-foreground: 0.78 0.18 195;
+    --muted: 0.15 0.008 250;
+    --muted-foreground: 0.52 0.02 220;
+    --accent: 0.72 0.19 55;
+    --accent-foreground: 0.08 0.005 250;
+    --destructive: 0.65 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+    --border: 0.22 0.012 240;
+    --input: 0.16 0.01 240;
+    --ring: 0.78 0.18 195;
+    --sidebar: 0.11 0.008 250;
+    --sidebar-foreground: 0.88 0.01 200;
+    --sidebar-primary: 0.78 0.18 195;
+    --sidebar-primary-foreground: 0.08 0.005 250;
+    --sidebar-accent: 0.18 0.01 250;
+    --sidebar-accent-foreground: 0.78 0.18 195;
+    --sidebar-border: 0.22 0.012 240;
+    --sidebar-ring: 0.78 0.18 195;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Mona Sans", "Geist", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+/* ============================================================
+   SYNTH UI CUSTOM UTILITIES
+   ============================================================ */
+@layer utilities {
+  .font-mono-synth {
+    font-family: "JetBrains Mono", "Geist Mono", ui-monospace, monospace;
+  }
+
+  .synth-panel {
+    background: oklch(var(--panel));
+    border: 1px solid oklch(var(--border));
+  }
+
+  .synth-panel-raised {
+    background: oklch(var(--panel-raised));
+    border: 1px solid oklch(0.28 0.015 240);
+    box-shadow: 
+      0 1px 0 oklch(0.25 0.02 200 / 0.5),
+      inset 0 1px 0 oklch(0.3 0.02 200 / 0.2);
+  }
+
+  .synth-panel-inset {
+    background: oklch(var(--panel-inset));
+    border: 1px solid oklch(0.15 0.01 240);
+    box-shadow: inset 0 2px 4px oklch(0 0 0 / 0.4);
+  }
+
+  .led-cyan {
+    background: oklch(var(--cyan-bright));
+    box-shadow: 0 0 6px 1px oklch(var(--cyan) / 0.8), 0 0 12px oklch(var(--cyan) / 0.4);
+    border-radius: 50%;
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+  }
+
+  .led-amber {
+    background: oklch(var(--amber));
+    box-shadow: 0 0 6px 1px oklch(var(--amber) / 0.8), 0 0 12px oklch(var(--amber) / 0.4);
+    border-radius: 50%;
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+  }
+
+  .led-green {
+    background: oklch(var(--green-led));
+    box-shadow: 0 0 6px 1px oklch(var(--green-led) / 0.8);
+    border-radius: 50%;
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+  }
+
+  .led-off {
+    background: oklch(0.18 0.01 240);
+    border-radius: 50%;
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+  }
+
+  .step-btn {
+    background: oklch(var(--step-inactive));
+    border: 1px solid oklch(0.28 0.015 240);
+    border-radius: 3px;
+    transition: background 0.08s, box-shadow 0.08s;
+    cursor: pointer;
+  }
+
+  .step-btn:hover {
+    background: oklch(0.28 0.015 240);
+  }
+
+  .step-btn.active {
+    background: oklch(var(--step-active));
+    box-shadow: 0 0 8px oklch(var(--cyan) / 0.6), inset 0 0 4px oklch(var(--cyan-bright) / 0.4);
+    border-color: oklch(var(--cyan-bright));
+  }
+
+  .step-btn.accent {
+    background: oklch(var(--step-accent));
+    box-shadow: 0 0 8px oklch(var(--amber) / 0.6);
+    border-color: oklch(var(--amber));
+  }
+
+  .step-btn.playhead {
+    outline: 2px solid oklch(var(--cyan-bright));
+    outline-offset: 1px;
+  }
+
+  .section-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: oklch(var(--muted-foreground));
+  }
+
+  .knob-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: oklch(var(--muted-foreground));
+    text-align: center;
+  }
+
+  .synth-btn {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    border: 1px solid oklch(var(--border));
+    background: oklch(var(--panel-raised));
+    color: oklch(var(--muted-foreground));
+    cursor: pointer;
+    transition: all 0.1s;
+    white-space: nowrap;
+  }
+
+  .synth-btn:hover {
+    background: oklch(0.2 0.015 240);
+    color: oklch(var(--foreground));
+  }
+
+  .synth-btn.active {
+    background: oklch(var(--cyan) / 0.15);
+    border-color: oklch(var(--cyan));
+    color: oklch(var(--cyan-bright));
+    box-shadow: 0 0 8px oklch(var(--cyan) / 0.3);
+  }
+
+  .synth-btn.amber-active {
+    background: oklch(var(--amber) / 0.15);
+    border-color: oklch(var(--amber));
+    color: oklch(var(--amber));
+    box-shadow: 0 0 8px oklch(var(--amber) / 0.3);
+  }
+
+  .modal-glass {
+    background: oklch(var(--popover));
+    backdrop-filter: blur(12px);
+    border: 1px solid oklch(var(--border));
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: oklch(var(--panel-inset));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(var(--border));
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(var(--muted-foreground));
+  }
+}
